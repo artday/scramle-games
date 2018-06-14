@@ -11,7 +11,7 @@ export class ScrambleComponent implements OnInit {
   currentWord: string;
   shuffledWord: string;
   userWord;
-  wins = 0; losses = 0; TTL = 10; secondsLeft = 0;
+  wins = 0; losses = 0; TTL = 20; secondsLeft = 0;
   timer = null;
 
   constructor(private wordsService: WordsService) { }
@@ -25,22 +25,22 @@ export class ScrambleComponent implements OnInit {
     this.timer = setInterval(() => this.getTime(), 1000);
   }
 
-  shuffleWord(w){
+  shuffleWord(w) {
     return this.wordsService.shuffleString(w);
   }
 
   checkInput() {
-    if (this.timer && this.userWord && (this.userWord.toUpperCase() === this.currentWord) && this.secondsLeft>0) {
+    if (this.timer && this.userWord && (this.userWord.toUpperCase() === this.currentWord) && this.secondsLeft > 0) {
       this.stop(true);
     }
   }
 
   getTime() {
     this.secondsLeft--;
-    if (this.secondsLeft <= 0){ this.stop(false); }
+    if (this.secondsLeft <= 0) { this.stop(false);  }
   }
 
-  stop(win:boolean){
+  stop(win: boolean) {
     clearInterval(this.timer); this.timer = null;
     win ? this.wins++ : (this.losses++, this.shuffledWord = this.currentWord);
   }
