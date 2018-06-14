@@ -1,0 +1,15 @@
+
+<h1>Scramble game</h1>
+
+<button (click)="start()" [disabled] = "timer" >play</button>
+
+<h3>time left: <span [textContent]="secondsLeft"></span></h3>
+
+<h2>{{shuffledWord}}</h2>
+
+<input [(ngModel)]="userWord"  type="text" (keyup)="checkInput()">
+
+<h2>wins: {{wins}}</h2>
+
+<h2>losses: {{losses}}</h2>
+
