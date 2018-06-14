@@ -11,7 +11,7 @@ export class ScrambleComponent implements OnInit {
   currentWord: string;
   shuffledWord: string;
   userWord;
-  wins = 0; losses = 0; TTL = 20; secondsLeft = 0;
+  wins = 0; losses = 0; TTL = 10; secondsLeft = 0;
   timer = null;
 
   constructor(private wordsService: WordsService) { }
@@ -42,7 +42,7 @@ export class ScrambleComponent implements OnInit {
 
   stop(win:boolean){
     clearInterval(this.timer); this.timer = null;
-    win ? this.wins++ : this.losses++;
+    win ? this.wins++ : (this.losses++, this.shuffledWord = this.currentWord);
   }
 
   ngOnInit() {

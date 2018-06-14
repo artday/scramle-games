@@ -1,13 +1,17 @@
 
 <h1>Scramble game</h1>
 
-<button (click)="start()" [disabled] = "timer" >play</button>
+<button (click)="start(); input.focus()" [disabled] = "timer" >
+    <span *ngIf="!timer; else timeLeft">{{ !currentWord ? 'start' : 'next' }}</span>
+    <ng-template #timeLeft>
+        <span>left {{secondsLeft}}</span>
+    </ng-template>
+</button>
 
-<h3>time left: <span [textContent]="secondsLeft"></span></h3>
 
-<h2>{{shuffledWord}}</h2>
 
-<input [(ngModel)]="userWord"  type="text" (keyup)="checkInput()">
+<label for="word"><h2>{{shuffledWord}}</h2></label>
+<input id="word" #input [(ngModel)]="userWord"  type="text" (keyup)="checkInput()">
 
 <h2>wins: {{wins}}</h2>
 
